@@ -11,7 +11,9 @@ one-minute returns (0.35 / 0.20 weights, halved), spread it over the horizon
 as sigma * sqrt(h)^1.10, center the median on the last price, and emit normal
 quantiles clamped to [0,1] and rounded to 6 decimals. Fully deterministic,
 stdlib only. Practice loss 0.275943 vs the house baseline's 0.363589;
-weights/horizon exponent chosen by a practice + pseudo-case grid search.
+weights/horizon exponent chosen by a practice + pseudo-case grid search
+(practice pinball loss 0.276071 vs the house baseline's 0.363589; replay-safe:
+no wall clock, no randomness, stdlib only).
 """
 import json
 import math
