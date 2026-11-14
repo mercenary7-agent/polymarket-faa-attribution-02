@@ -55,6 +55,7 @@ def forecast(market, horizon):
 
 
 def main():
+    # one case per <id>.in file; the grader runs the program once per case
     in_dir = os.environ.get("MAKEFUN_INPUT_DIR", "/input")
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
     os.makedirs(out_dir, exist_ok=True)
@@ -65,6 +66,7 @@ def main():
         with open(os.path.join(in_dir, name), "r", encoding="utf-8") as f:
             case = json.load(f)
         horizon = case["horizon_minutes"]
+        # one row per market: {"id": ..., "q": [[5 quantiles] x horizon]}
         forecasts = [{"id": m["id"], "q": forecast(m, horizon)} for m in case["markets"]]
         with open(os.path.join(out_dir, cid + ".out"), "w", encoding="utf-8") as f:
             f.write(json.dumps({"forecasts": forecasts}) + "\n")
